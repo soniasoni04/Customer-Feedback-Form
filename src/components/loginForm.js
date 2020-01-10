@@ -1,15 +1,33 @@
 import React, { Component } from "react";
 
 class LoginForm extends Component {
-  state = {};
+  state = {
+    account: { username: "", password: "" }
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    console.log("form is submitted");
+    console.log("users details : ", this.state.account);
+  };
+
+  handleChange = e => {
+    const account = { ...this.state.account };
+    account[e.target.name] = e.target.value;
+    this.setState({ account });
+  };
   render() {
+    const { account } = this.state;
     return (
       <div className="container login">
         <h1 className="">Login</h1>
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <div className="form-group ">
             <label htmlFor="username">Username</label>
             <input
+              value={account.username}
+              name="username"
+              onChange={this.handleChange}
               id="username"
               type="text"
               className="form-control"
@@ -19,6 +37,9 @@ class LoginForm extends Component {
           <div className="form-group">
             <label htmlFor="password">Password</label>
             <input
+              value={account.password}
+              name="password"
+              onChange={this.handleChange}
               id="password"
               type="password"
               className="form-control"
