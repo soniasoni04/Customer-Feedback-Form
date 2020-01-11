@@ -4,7 +4,12 @@ import Input from "./common/input";
 
 class LoginForm extends Component {
   state = {
-    account: { username: "", email: "", rating: "", comments: "" },
+    account: {
+      username: "",
+      email: "",
+      rating: "",
+      comments: ""
+    },
     errors: { username: "", email: "", rating: "", comments: "" }
   };
 
@@ -38,10 +43,10 @@ class LoginForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log("form is submitted");
+    //console.log("form is submitted");
 
     const errors = this.validate();
-    console.log("errors: ", errors);
+    //console.log("errors: ", errors);
     this.setState({ errors: errors || {} });
     if (errors) return;
 
@@ -87,6 +92,7 @@ class LoginForm extends Component {
             onChange={this.handleChange}
             errors={errors.comments}
           />
+
           <button className="btn btn-primary">Submit</button>
         </form>
       </div>
