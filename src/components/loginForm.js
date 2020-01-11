@@ -4,17 +4,25 @@ import Input from "./common/input";
 
 class LoginForm extends Component {
   state = {
-    account: { username: "", password: "" },
-    errors: { username: "", password: "" }
+    account: { username: "", email: "", rating: "", comments: "" },
+    errors: { username: "", email: "", rating: "", comments: "" }
   };
 
   schema = {
     username: Joi.string()
       .required()
       .label("Username"),
-    password: Joi.string()
+    email: Joi.string()
       .required()
-      .label("Password")
+      .label("Email-ID"),
+    rating: Joi.number()
+      .required()
+      .min(0)
+      .max(10)
+      .label("Rating"),
+    comments: Joi.string()
+      .required()
+      .label("Comments")
   };
 
   validate = () => {
@@ -49,7 +57,7 @@ class LoginForm extends Component {
     const { account, errors } = this.state;
     return (
       <div className="container login">
-        <h1 className="">Login</h1>
+        <h1 className="">Customer-Feedback-Form</h1>
         <form onSubmit={this.handleSubmit}>
           <Input
             name="username"
@@ -59,13 +67,27 @@ class LoginForm extends Component {
             errors={errors.username}
           />
           <Input
-            name="password"
-            label="Password"
-            value={account.password}
+            name="email"
+            label="Email-ID"
+            value={account.email}
             onChange={this.handleChange}
-            errors={errors.password}
+            errors={errors.email}
           />
-          <button className="btn btn-primary">Login</button>
+          <Input
+            name="rating"
+            label="Rating"
+            value={account.rating}
+            onChange={this.handleChange}
+            errors={errors.rating}
+          />
+          <Input
+            name="comments"
+            label="Comments"
+            value={account.comments}
+            onChange={this.handleChange}
+            errors={errors.comments}
+          />
+          <button className="btn btn-primary">Submit</button>
         </form>
       </div>
     );
